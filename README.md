@@ -14,16 +14,24 @@ Este projeto visa implementar um compilador completo para uma linguagem de progr
 
 ## 📁 Estrutura do Projeto
 
-
-## 🚀 Como Executar
+## Como Executar
 
 ### Pré-requisitos
 - Python 3.8+
-- ANTLR 4.13.1
+- [ANTLR 4.13.1](https://www.antlr.org/download/antlr-4.13.1-complete.jar)
 - Java (para executar o ANTLR)
 
-###Configuração do ANTLR
+## Configuração do Ambiente
+```bash
+# Criar ambiente virtual
+python -m venv virtual
 
+# Ativar (Windows)
+virtual\Scripts\activate
+
+# Instalar dependências
+pip install -r requirements.txt
+```
 ## Instalação das Dependências
 ```bash
 # Instalar runtime do ANTLR para Python
@@ -51,8 +59,7 @@ python src/main.py --input arquivo_fonte --output saida.asm
   - [Gustavo Curado](https://github.com/Guxtavoc)
   - [Daniel Bonfim](https://github.com/DanielBarros19)
 
-📅 Status do Projeto
-🚧 Em Desenvolvimento 🚧
+📅 Status do Projeto Em Desenvolvimento 
 
 Análise Léxica
 
