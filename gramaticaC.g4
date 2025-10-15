@@ -1,8 +1,11 @@
 grammar MicroLang;
 programa
-    : 'programa' ID bloco EOF
+    : biblioteca 'int' 'main''(' ')' bloco EOF
     ;
 
+biblioteca
+    : '#include' '<' ID '.' ID'>'
+    ;
 bloco
     : '{' (declaracao | comando)* '}'
     ;
@@ -12,9 +15,8 @@ declaracao
     ;
 
 tipo
-    : 'inteiro'
-    | 'real'
-    | 'texto'
+    : 'int'
+    | 'float'
     ;
 
 lista_variaveis
@@ -31,17 +33,14 @@ comando
     | leitura
     | atribuicao ';'
     | enquanto
-    | repita
-    | laco_para
-    | loop_infinito
     ;
 
 escrita
-    : 'printf' ( expressao | STRING ) ';'
+    : 'printf' '(' ( expressao | STRING ) ')' ';'
     ;
 
 leitura
-    : 'scan' lista_identificador ';'
+    : 'scanf' '(' STRING (',' '&'? ID)* ')' ';'
     ;
 
 lista_identificador
@@ -61,21 +60,6 @@ enquanto
     : 'while' '(' expr_bool ')' bloco
     ;
 
-repita
-    : 'do' bloco 'ate' '(' expr_bool ')' ';'?   // opcional o ponto-e-vírgula final
-    ;
-
-laco_para
-    : 'for' '(' atribuicao ';' expr_bool? ';' incremento ')' bloco
-    ;
-
-incremento
-    : ID ( '++' | '--' | '+=' expressao | '-=' expressao )
-    ;
-
-loop_infinito
-    : 'loop' bloco
-    ;
 expressao
     : expr_bool
     ;
