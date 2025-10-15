@@ -66,7 +66,7 @@ repita
     ;
 
 laco_para
-    : 'for' '(' atribuicao ';' expr_bool? ';' incremento ')' bloco
+    : 'fator' '(' atribuicao ';' expr_bool? ';' incremento ')' bloco
     ;
 
 incremento
