@@ -1,4 +1,4 @@
-grammar MicroLang;
+grammar gramaticaC;
 programa
     : biblioteca 'int' 'main''(' ')' bloco EOF
     ;

@@ -1,6 +1,4 @@
 /generated/
-*.interp
-*.tokens
 __pycache__/
 *.pyc
 *.pyo
