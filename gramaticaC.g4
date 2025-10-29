@@ -33,6 +33,7 @@ comando
     | leitura
     | atribuicao ';'
     | enquanto
+    | condicional
     ;
 
 escrita
@@ -42,6 +43,10 @@ escrita
 leitura
     : 'scanf' '(' STRING (',' '&'? ID)* ')' ';'
     ;
+condicional
+    : 'if' '(' expr_bool ')' bloco ('else' bloco)?
+    ;
+
 
 lista_identificador
     : lista_identificador ',' identificador
