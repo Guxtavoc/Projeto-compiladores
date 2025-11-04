@@ -1,35 +1,32 @@
 #include <stdio.h>
+int main()
+{
+    float a;
+    float b;
+    float c;
 
-int main() {
-    float a, b, c;
-    
-    printf("Digite tres valores decimais positivos: ");
-    scanf("%f%f%f", &a, &b, &c);
-    
-    if (a <= 0 || b <= 0 || c <= 0) {
-        printf("Erro: Valores devem ser positivos\n");
-    } else {
-        if ((a + b > c) && (a + c > b) && (b + c > a)) {
-            if (a == b && b == c) {
-                printf("Triangulo equilatero valido\n");
-            } else {
-                if (a == b || a == c || b == c) {
-                    printf("Triangulo isosceles valido\n");
-                } else {
-                    printf("Triangulo escaleno valido\n");
-                }
-            }
-        } else {
-            printf("Medidas invalidas\n");
+    printf("Digite o primeiro lado: ");
+    scanf("%f", &a);
+
+    printf("Digite o segundo lado: ");
+    scanf("%f", &b);
+
+    printf("Digite o terceiro lado: ");
+    scanf("%f", &c);
+
+    if ((a <= 0) || (b <= 0) || (c <= 0))
+    {
+        printf("Valores devem ser positivos");
+    }
+    else
+    {
+        if (((a + b) <= c) || ((a + c) <= b) || ((b + c) <= a))
+        {
+            printf("Nao forma um triangulo");
+        }
+        else
+        {
+            printf("Forma um triangulo");
         }
     }
-    
-    // Testando loop enquanto
-    int contador = 0;
-    while (contador < 3) {
-        printf("Teste while: %d\n", contador);
-        contador = contador + 1;
-    }
-    
-    return 0;
 }

@@ -37,7 +37,7 @@ comando
     ;
 
 escrita
-    : 'printf' '(' ( expressao | STRING ) ')' ';'
+    : 'printf' '(' ( expressao | STRING ) (',' ID)? ')' ';'
     ;
 
 leitura
@@ -66,7 +66,7 @@ enquanto
     ;
 
 repita
-    : 'do' bloco 'ate' '(' expr_bool ')' ';'?   // opcional o ponto-e-vírgula final
+    : 'do' bloco 'ate' '(' expr_bool ')' ';'? 
     ;
 
 laco_para
