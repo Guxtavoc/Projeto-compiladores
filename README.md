@@ -32,10 +32,7 @@ pip install -r requirements.txt
 ```
 ## Instalação das Dependências
 ```bash
-# Instalar runtime do ANTLR para Python
-pip install antlr4-python3-runtime
-
-# Ou via requirements.txt
+# via requirements.txt
 pip install -r requirements.txt
 ```
 ## Execução do Compilador
@@ -45,9 +42,6 @@ java -jar ./antlr-4.13.1-complete.jar -Dlanguage=Python3 gramaticaC.g4
 
 # Executar o compilador
 python.exe main.py .\arquivofonte.c
-
-# Ou com mais opções
-python src/main.py --input arquivo_fonte --output saida.asm
 ```
 ##  Desenvolvimento
 
