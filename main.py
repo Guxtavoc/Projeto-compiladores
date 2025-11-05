@@ -4,6 +4,7 @@ from gramaticaCParser import gramaticaCParser
 from graphviz import Digraph
 import sys
 
+# Usa o Graphviz pra gerar o png da arvore
 class TreeVisualizer:
     def __init__(self):
         self.node_counter = 0
@@ -41,26 +42,26 @@ class TreeVisualizer:
                     rule_names = parser.ruleNames
                     return rule_names[rule_index]
             return "No"
-
+        
 def main():
-    if len(sys.argv) != 2:
-        print("Uso: python main.py <arquivo.c>")
-        return
-    
+    # pega o arquivo como argumento de execução
     arquivo = sys.argv[1]
     
     try:
+        # tenta pegar as dependencias e o arquivo para execução
         input_stream = FileStream(arquivo)
         lexer = gramaticaCLexer(input_stream)
         tokens = CommonTokenStream(lexer)
         parser = gramaticaCParser(tokens)
         tree = parser.programa()
-        
+
         print("Analise sintatica concluida!")
         print("Arvore textual:", tree.toStringTree(recog=parser))
-        
+        # chama a função de vizuala~çao da arvore
         visualizer = TreeVisualizer()
         output_path = visualizer.visualize(tree, parser)
+        
+        # da output do arquivo
         print("Arvore visual gerada:", output_path)
         
     except Exception as e:

@@ -1,9 +1,7 @@
 #include <stdio.h>
 int main()
 {
-    float a;
-    float b;
-    float c;
+    float a, b, c;
 
     printf("Digite o primeiro lado: ");
     scanf("%f", &a);
@@ -16,17 +14,31 @@ int main()
 
     if ((a <= 0) || (b <= 0) || (c <= 0))
     {
-        printf("Valores devem ser positivos");
+        printf("Erro: Valores devem ser positivos");
     }
     else
     {
         if (((a + b) <= c) || ((a + c) <= b) || ((b + c) <= a))
         {
-            printf("Nao forma um triangulo");
+            printf("Medidas invalidas");
         }
         else
         {
-            printf("Forma um triangulo");
+            if ((a == b) && (b == c))
+            {
+                printf("Triangulo equilatero valido");
+            }
+            else
+            {
+                if ((a == b) || (a == c) || (b == c))
+                {
+                    printf("Triangulo isosceles valido");
+                }
+                else
+                {
+                    printf("Triangulo escaleno valido");
+                }
+            }
         }
     }
 }

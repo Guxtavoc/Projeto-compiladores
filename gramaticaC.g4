@@ -28,7 +28,6 @@ comando
     | enquanto
     | condicional
     | repita
-    | laco_para
     ;
 
 escrita
@@ -42,7 +41,7 @@ leitura
 atribuicao
     : ID '=' expressao
     ;
-
+    
 enquanto
     : 'while' '(' expressao ')' bloco
     ;
@@ -53,10 +52,6 @@ condicional
 
 repita
     : 'do' bloco 'while' '(' expressao ')' ';'
-    ;
-
-laco_para
-    : 'for' '(' atribuicao? ';' expressao? ';' atribuicao? ')' bloco
     ;
     
 expressao
