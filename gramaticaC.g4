@@ -1,17 +1,19 @@
 grammar gramaticaC;
+
 programa
-    : biblioteca 'int' 'main''(' ')' bloco EOF
+    : biblioteca 'int' 'main' '(' ')' bloco EOF
     ;
 
 biblioteca
-    : '#include' '<' ID '.' ID'>'
+    : '#include' '<' ID '.' ID '>'
     ;
+
 bloco
     : '{' (declaracao | comando)* '}'
     ;
 
 declaracao
-    : tipo lista_variaveis ';'
+    : tipo ID ('=' expressao)? (',' ID ('=' expressao)?)* ';'
     ;
 
 tipo
@@ -19,121 +21,62 @@ tipo
     | 'float'
     ;
 
-lista_variaveis
-    : lista_variaveis ',' var_decl_item
-    | var_decl_item
-    ;
-
-var_decl_item
-    : ID ( '=' (NUMERO | REAL | STRING | ID) )?
-    ;
-    
 comando
     : escrita
     | leitura
     | atribuicao ';'
     | enquanto
     | condicional
+    | repita
+    | laco_para
     ;
 
 escrita
-    : 'printf' '(' ( expressao | STRING ) (',' ID)? ')' ';'
+    : 'printf' '(' (STRING | expressao) (',' expressao)* ')' ';'
     ;
 
 leitura
     : 'scanf' '(' STRING (',' '&'? ID)* ')' ';'
     ;
-condicional
-    : 'if' '(' expr_bool ')' bloco ('else' bloco)?
-    ;
-
-
-lista_identificador
-    : lista_identificador ',' identificador
-    | identificador
-    ;
-
-identificador
-    : ID
-    ;
 
 atribuicao
     : ID '=' expressao
     ;
-    
+
 enquanto
-    : 'while' '(' expr_bool ')' bloco
+    : 'while' '(' expressao ')' bloco
+    ;
+
+condicional
+    : 'if' '(' expressao ')' bloco ('else' bloco)?
     ;
 
 repita
-    : 'do' bloco 'ate' '(' expr_bool ')' ';'? 
+    : 'do' bloco 'while' '(' expressao ')' ';'
     ;
 
 laco_para
-    : 'fator' '(' atribuicao ';' expr_bool? ';' incremento ')' bloco
+    : 'for' '(' atribuicao? ';' expressao? ';' atribuicao? ')' bloco
     ;
-
-incremento
-    : ID ( '++' | '--' | '+=' expressao | '-=' expressao )
-    ;
-
-loop_infinito
-    : 'loop' bloco
-    ;
+    
 expressao
-    : expr_bool
+    : expressao ('||' | '&&') expressao
+    | expressao ('==' | '!=' | '<' | '<=' | '>' | '>=') expressao
+    | expressao ('+' | '-') expressao
+    | expressao ('*' | '/') expressao
+    | ('+' | '-')? atomo
     ;
 
-expr_bool
-    : expr_relacao ('||' expr_relacao)*
-    ;
-
-expr_relacao
-    : expr_comparacao (('==' | '!=' | '<' | '<=' | '>' | '>=') expr_comparacao)?
-    ;
-
-expr_comparacao
-    : termo (('+' | '-') termo)*
-    ;
-
-termo
-    : fator (('*' | '/') fator)*
-    ;
-
-fator
-    : ('+' | '-') fator
-    | NUMERO
+atomo
+    : NUMERO
     | REAL
     | STRING
     | ID
     | '(' expressao ')'
     ;
 
-primary
-    : NUMERO
-    | REAL
-    | STRING
-    | ID
-    | '(' expr_bool ')'
-    ;
-
-ID
-    : [a-zA-Z_] [a-zA-Z_0-9]*
-    ;
-
-NUMERO
-    : ('0'..'9')+
-    ;
-
-REAL
-    :
-    (NUMERO)+ '.' (NUMERO)*
-    ;
-
-STRING
-    : '"' ( ~["\\] | '\\' . )* '"'
-    ;
-
-WS
-    : [ \t\r\n]+ -> skip
-    ;
+ID      : [a-zA-Z_][a-zA-Z_0-9]*;
+NUMERO  : [0-9]+;
+REAL    : [0-9]+ '.' [0-9]*;
+STRING  : '"' (~["\\] | '\\' .)* '"';
+WS      : [ \t\r\n]+ -> skip;
