@@ -7,6 +7,7 @@ from antlr4.tree.Tree import TerminalNodeImpl
 from graphviz import Digraph
 from codigo_intermediario import CodigoIntermediario
 from codigo_final import CodigoFinal
+from semantico import Semantico
 
 class TreeVisualizer:
     def __init__(self):
