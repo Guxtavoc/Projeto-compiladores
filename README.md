@@ -59,6 +59,8 @@ Análise Sintática OK
 
 Análise Semântica OK
 
-Geração de Código
+Geração de Código Intermediário OK
+
+Geração de Código Final (Python) OK
 
 
