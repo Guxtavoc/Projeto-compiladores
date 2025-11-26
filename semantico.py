@@ -3,13 +3,9 @@ from gramaticaCParser import gramaticaCParser
 
 class Semantico(gramaticaCVisitor):
     def __init__(self):
-        # tabela: nome → tipo
         self.tabela = {}
         self.erros = []
 
-    # -----------------------------------------------------
-    # Declaração: tipo ID ('=' expr)? (',' ID ('=' expr)?)* ';'
-    # -----------------------------------------------------
     def visitDeclaracao(self, ctx: gramaticaCParser.DeclaracaoContext):
         tipo = ctx.tipo().getText()
 
@@ -23,9 +19,6 @@ class Semantico(gramaticaCVisitor):
 
         return self.visitChildren(ctx)
 
-    # -----------------------------------------------------
-    # Atribuição: ID '=' expressao
-    # -----------------------------------------------------
     def visitAtribuicao(self, ctx: gramaticaCParser.AtribuicaoContext):
         nome = ctx.ID().getText()
 
@@ -42,9 +35,6 @@ class Semantico(gramaticaCVisitor):
 
         return self.visitChildren(ctx)
 
-    # -----------------------------------------------------
-    # Uso de variáveis no átomo
-    # -----------------------------------------------------
     def visitAtomo(self, ctx: gramaticaCParser.AtomoContext):
         if ctx.ID():
             nome = ctx.ID().getText()
@@ -52,9 +42,6 @@ class Semantico(gramaticaCVisitor):
                 self.erros.append(f"Variável '{nome}' usada sem declaração.")
         return self.visitChildren(ctx)
 
-    # -----------------------------------------------------
-    # Inferência de tipo da expressão
-    # -----------------------------------------------------
     def _get_tipo_expr(self, ctx):
         # Se é um átomo diretamente
         if isinstance(ctx, gramaticaCParser.AtomoContext):
@@ -72,7 +59,7 @@ class Semantico(gramaticaCVisitor):
             if ctx.expressao():
                 return self._get_tipo_expr(ctx.expressao())
 
-        # Se a expressão tem filhos (operação binária)
+        # Se a expressão é uma operação binária
         if ctx.getChildCount() == 3:
             filho0 = ctx.getChild(0)
             filho2 = ctx.getChild(2)
